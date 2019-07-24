@@ -1,0 +1,144 @@
+###############################################################################
+#                        Data_Import_and_Parameters.py                        #
+#Measurements Set Import, Validation Set Import and System Elements Parameters#
+#Use Validation Set section only to check error between estimated values of   #
+#voltage and current and a set o measurements with validation purposes.       #
+###############################################################################
+
+###############################################################################
+#                               Jacobian.py                                   #
+#Jacobian matrix for 13 Node Test Feeder Case. First is defined a function    #
+#that gives the a, b, c and parameters. Then the function is executed and its #
+#results placed in the appropriate position of the Jacobian Matrix. In order  #
+#to create elements diffeter than distribution lines or                       #
+#Wye-Grounded-Wye_Grounded step down transformers modify abcd function. If is #
+#going to be implemented a new distribution system modify also the positions  #
+#where abcd parameters of each element are placed.                            #
+###############################################################################
+
+###############################################################################
+#                                    SE.py                                    #
+#Perform State Estimation using Two Step Linear State Estimation, and the put #
+#all the results in a pandas dataframe to be able to use it easier in the     #
+#following scripts.                                                           #
+###############################################################################
+
+###############################################################################
+#                                Error.py                                     #
+#Three different options of functions to evaluate the error of the state      #
+#estimation procedure and be able to validate the method. The 1st one finds   #
+#the different between the estimated values and the validation set of         #
+#measurements. The 2nd one corresponds to the percentual relative error of the#
+#estimated values and the validation set of measurements. The 3rd one is the  #
+#absolute error in per unit base. Run only the section that corresponds to the#
+#desired error calculation.                                                   #
+###############################################################################
+
+###############################################################################
+#                              SE_Error.py                                    #
+#Use the function of Error.py to find the error of the estimated values in    #
+#SE.py and the validation set of measurements. This script is used to validate#
+#the Two Step Linear State Estimation method. Finally, this script finds the  #
+#maximum value of the errors calculated                                       #
+###############################################################################
+
+###############################################################################
+#                                S_Ref.py                                     #
+#Reference Apparent Power (s_ref) Calculation. Calculate apparent power (S)   #
+#with the formula S=V*conjugate(I). This result is used to compare with other #
+#results for Bad Data Detection (BDD). It includes measured values and        #
+#estimated values.                                                            #
+###############################################################################
+
+###############################################################################
+#                             Attack_Data.py                                  #
+#Modifies the measurement in a specified percent. Attack is the percentage    #
+#(0 to 1) modification. time01 and time02 are the starting and ending time,   #
+#respectively, of the attack. It requires to specify the measurements that are#
+#being attacked.                                                              #
+###############################################################################
+
+###############################################################################
+#                             SE_Atta.py                                      #
+#USE DATA ATTACKED to perform State Estimation using Two Step Linear State    #
+#Estimation, and the put all the results in a pandas dataframe to be able to  #
+#use it easier in the following scripts.                                      #
+###############################################################################
+
+###############################################################################
+#                                S_new.py                                     #
+#Apparent power calculated using ATTACKED DATA. Calculate apparent power (S)  #
+#with the formula S=V*conjugate(I). This result is compared with the          #
+#refference apparent power for Bad Data Detection (BDD). It includes measured #
+#values and estimated values.                                                 #
+###############################################################################
+
+###############################################################################
+#                               Detection.py                                  #
+#Calculate the difference between the reference apparent power and the        #
+#calculated using the attacked data. The result is separated in real and      #
+#imaginary components, if one of them is bigger than a threshold value is     #
+#placed 1 in a detection output dataframe. All the remaining values are 0. In #
+#this case the threshold value is 0.00025.Finally all the results are plotted #
+#and the figures are stored in the current work folder.                       #
+###############################################################################
+
+###############################################################################
+#                               Pseudo.py                                     #
+#The historic data for pseudomeasurements is imported for the same time       #
+#interval that the attack happens. The pseudo measurement is created using    #
+#Gaussian Mixture Model (GMM). The number of gaussian components is estimated #
+#using BIC and AIC method, the lower number of components is used. The        #
+#probability density function of the GMM is found and the value with maximum  #
+#probability is used as pseudomeasurement. In the middle of the script is     #
+#created a plot to illustrate the GMM method.                                 #
+###############################################################################
+
+###############################################################################
+#                             SE_Replaced.py                                  #
+#State estimation after bad data replacement. Is used two step linear state   #
+#estimation. All the results are in a dataframe to be able to use it easier in#
+# the following scripts.                                                      #
+###############################################################################
+
+###############################################################################
+#                                S_Replaced.py                                #
+#Apparent power calculated after bad data replacement. Calculate apparent     #
+#power (S) with the formula S=V*conjugate(I). It includes measured values and #
+#estimated values.                                                            #
+###############################################################################
+
+###############################################################################
+#                               BDD_replaced.py                               #
+#Calculate the difference between the reference apparent power and the        #
+#calculated using the REPLACED data. The result is separated in real and      #
+#imaginary components, if one of them is bigger than a threshold value is     #
+#placed 1 in a detection output dataframe. All the remaining values are 0. In #
+#this case the threshold value is 0.00025. Finally, all the results are       #
+#plotted and the figures are stored in the current work folder.               #
+###############################################################################
+
+###############################################################################
+#                              Plot_Meas.py                                   #
+#Plot all measurements in a node and store the figures in the current working #
+#folder. The curves are separated in real and imaginary components.           #
+###############################################################################
+
+###############################################################################
+#                                Plot_SE.py                                   #
+#Plot state estimation results and store the figures in the current working   #
+#folder. The curves are separated in real and imaginary components.           #
+###############################################################################
+
+###############################################################################
+#                              Plot_S_ref.py                                  #
+#Plot the calculated reference apparent power and store the figures in the    #
+#current working folder. The curves are separated in real and imaginary       #
+#components.                                                                  #
+###############################################################################
+
+###############################################################################
+#                            Additional_Plots.py                              #
+#Create additional plots required and store the figures in the current working#
+#folder.                                                                      #
+###############################################################################
